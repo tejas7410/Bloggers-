@@ -4,11 +4,13 @@ import './App.css'
 import { useDispatch } from 'react-redux'
 import authservice from './appwrite/auth'
 import { Header, Footer } from './components/index'
+// import { login, logout } from './store/authslice'
+import { authSlice } from './store/authslice';
 import { Outlet } from 'react-router-dom'
 function App() {
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
-
+  const { login, logout } = authSlice.actions
   useEffect(() => {
     authservice.getCurrentuser()
       .then((userData) => {
@@ -29,7 +31,7 @@ function App() {
         <main>
           TODO: <Outlet />
         </main>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </div>
   ) : (

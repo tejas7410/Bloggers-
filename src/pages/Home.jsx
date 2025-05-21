@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import appwriteService from "../appwrite/config";
-import { Container, PostCard } from '../components'
+import appwriteService from "../appwrite/config.js";
+import { Container, PostCard } from '../components/index.js'
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 

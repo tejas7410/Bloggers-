@@ -18,6 +18,7 @@ function Login() {
             if (session) {
                 const userData = await authservice.getCurrentuser()
                 if (userData) {
+                    console.log("userData :: Login", userData)
                     dispatch(authlogin(userData))
                     navigate('/')
                 }

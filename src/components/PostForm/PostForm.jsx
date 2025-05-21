@@ -16,7 +16,11 @@ export default function PostForm({ post }) {
     });
 
     const navigate = useNavigate();
-    const userData = useSelector((state) => state.auth.userData);
+    const userData = useSelector((state) => {
+        console.log("state", state)
+        return state.auth.userData;
+    });
+    console.log("userData", userData);
 
     const submit = async (data) => {
         if (post) {
@@ -35,16 +39,19 @@ export default function PostForm({ post }) {
                 navigate(`/post/${dbPost.$id}`);
             }
         } else {
+            console.log("data.image", data.image[0]);
+
             const file = await appwriteservice.uploadFile(data.image[0]);
-
+            console.log(file.$id);
             if (file) {
-                const fileId = file.$id;
-                data.featuredImage = fileId;
-                const dbPost = await appwriteservice.createPost({ ...data, userId: userData.$id });
-
+                const { image, ...rest } = data;
+                const dbPost = await appwriteservice.createPost({ ...rest, userId: userData.$id, featuredImage: file.$id });
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`);
                 }
+            }
+            else {
+                console.log("Error uploading file");
             }
         }
     };
@@ -108,7 +115,10 @@ export default function PostForm({ post }) {
                     </div>
                 )}
                 <Select
-                    options={["active", "inactive"]}
+                    options={[
+                        { label: "Active", value: "active" },
+                        { label: "Inactive", value: "inactive" }
+                    ]}
                     label="Status"
                     className="mb-4"
                     {...register("status", { required: true })}

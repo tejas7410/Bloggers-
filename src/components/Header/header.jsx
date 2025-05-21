@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Logo, LogoutBtn } from '../index'
+import { Button, Container, Logo, LogoutBtn } from '../index'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -18,7 +18,7 @@ const header = () => {
 
 
     return (
-        <header className='py-3 bg-gray-500 shadow'>
+        <header className='py-3 bg-gray-600 shadow'>
             <Container >
                 <nav className='flex'>
                     <div className='mr-4'>
@@ -39,9 +39,9 @@ const header = () => {
                             ) : null
                         )}
                         {authstatus && (
-                            <li>
+                            <div >
                                 <LogoutBtn />
-                            </li>
+                            </div>
                         )}
                     </ul>
                 </nav>

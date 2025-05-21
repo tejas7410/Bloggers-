@@ -19,7 +19,7 @@ export class services {
             return await this.databases.createDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                slug,
+                ID.unique(),
                 {
                     title,
                     content,
@@ -76,6 +76,7 @@ export class services {
         }
     }
     async getPosts(queries = []) { // multiple queries can be passed in a array 
+        // console.log(conf.appwriteDatabaseId, conf.appwriteCollectionId);
         try {
             return await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
@@ -117,14 +118,15 @@ export class services {
     }
     getFilePreview(fileId) {
         try {
-            return this.bucket.getFilePreview(
+            return this.bucket.getFileView(
                 conf.appwriteBucketId,
-                fileId
+                fileId,
             )
         } catch (error) {
             console.log("Appwrite service :: getFilePreview :: error", error);
-            return false;
+            return null;
         }
+        return false;
     }
 }
 const service = new services();

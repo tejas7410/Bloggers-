@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigation } from 'react-router-dom'
-import { authSlice } from '../store/authslice';
+import { useNavigate } from 'react-router-dom'
 
-export default function Protected({ children }, authentication = true) {
+export default function Protected({ children, authentication = true }) {
 
-    const navigate = useNavigation();
+    const navigate = useNavigate();
     const [loader, setloader] = useState(true)
     const authstatus = useSelector((state) => state.auth.status)
 
     useEffect(() => {
         if (authentication && authstatus !== authentication) {
-            navigate("/login")
+            { children }
         }
         else if (!authentication && authstatus !== authentication) {
             navigate("/")

@@ -1,56 +1,38 @@
-import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
-import './App.css'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import authservice from './appwrite/auth'
-import { Header, Footer } from './components/index'
-// import { login, logout } from './store/authslice'
-import { authSlice } from './store/authslice';
+import './App.css'
+import authService from "./appwrite/auth"
+import { login, logout } from "./store/authSlice"
+import { Footer, Header } from './components'
 import { Outlet } from 'react-router-dom'
+
 function App() {
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
-  const { login, logout } = authSlice.actions
+
   useEffect(() => {
-    authservice.getCurrentuser()
+    authService.getCurrentuser()
       .then((userData) => {
         if (userData) {
           dispatch(login({ userData }))
         } else {
           dispatch(logout())
         }
-      }).catch((error) => {
-        console.log("Appwrite service :: getCurrentUser :: error", error)
-        dispatch(logout())
-      }).finally(() => setLoading(false))
+      })
+      .finally(() => setLoading(false))
   }, [])
+
   return !loading ? (
-    <div className="flex flex-wrap content-between min-h-screen text-white bg-gray-900">
-      <div className='block w-full'>
+    <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
+      <div className='w-full block'>
         <Header />
         <main>
-          TODO: <Outlet />
+          <Outlet />
         </main>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </div>
-  ) : (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900">
-      <motion.div
-        className="mb-8 text-4xl font-bold text-white"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -50 }}
-        transition={{
-          repeat: Infinity,
-          duration: 2,
-          ease: "linear",
-        }}
-      >
-        Blogger...
-      </motion.div>
-    </div>
-  );
+  ) : null
 }
 
 export default App

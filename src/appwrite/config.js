@@ -66,25 +66,25 @@ export class services {
     async getPost(slug) {
         try {
             return await this.databases.getDocument(
-                appwriteDatabaseId,
-                appwriteCollectionId,
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
                 slug
-            )
+            );
         } catch (error) {
             console.log("Apprwite service :: getPost :: error", error);
             return false;
         }
     }
-    async getPosts(queries = [Query.equal("status", "active")]) { // multiple queries can be passed in a array 
+    async getPosts(queries = []) { // multiple queries can be passed in a array 
         try {
-            return await this.databases(
-                appwriteDatabaseId,
-                appwriteCollectionId,
-                queries,
+            return await this.databases.listDocuments(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
+                queries
                 // [
                 //     [Query.equal("status", "active")]-----> can be used in this palce instead or passing a variable queries
                 // ]
-            )
+            );
         } catch (error) {
             console.log("Appwrite service :: getPosts :: error", error);
             return false;
@@ -127,5 +127,5 @@ export class services {
         }
     }
 }
-
-export default services;
+const service = new services();
+export default service;

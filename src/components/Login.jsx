@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import { login as authlogin } from '../store/authSlice.js'
+import { login as authlogin } from '../store/authslice.js'
 import { Button, Input, Logo } from './index.js'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'

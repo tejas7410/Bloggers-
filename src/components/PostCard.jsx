@@ -8,7 +8,7 @@ function PostCard({
     return (
         <Link to={`/post/${$id}`} className='w-full'>
             <div className='rounded-xl w-full p-4 bg-gray-100'>
-                <div className='justify-center w-full mb-4'>
+                <div className='justify-center w-full mb-4 overflow-hidden'>
                     <img src={appwriteService.getFilePreview(featuredImage)} alt={title}
                         className='rounded-xl' />
                 </div>

@@ -1,7 +1,9 @@
 import conf from "../conf/conf.js";
 import { Client, ID, Databases, Storage, Query } from "appwrite";
 
-
+//This is a service class for handling all appwrite related operations
+// It includes methods for creating, updating, deleting, and fetching posts,
+// as well as file upload and deletion functionalities.
 export class services {
     client = new Client();
     databases;

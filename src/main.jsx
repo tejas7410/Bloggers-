@@ -8,13 +8,14 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import { AuthLayout, Login } from './components/index.js'
 
+// Importing pages 
 
 import AddPost from "./pages/AddPost.jsx";
 import Signup from './pages/SignUp.jsx'
 import EditPost from "./pages/EditPost.jsx";
 import Post from "./pages/Post.jsx";
 import AllPosts from "./pages/AllPost.jsx";
-
+// Creating a router for the application
 const router = createBrowserRouter([
   {
     path: "/",
